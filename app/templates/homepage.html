@@ -1,0 +1,13 @@
+{% extends "homepage_layout.html" %}
+
+{% block title%}
+    homepage
+{% endblock%}
+
+{% block type %}
+    <div class="page_beginning">
+        <div class="text-center">
+          <a href={{url_for('post')}} class="btn btn-primary" role="button">Make Post</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+  <ul class="navbar-nav ms-auto">
+    <li class="navbar-item">
+      <span><a href={{url_for("login")}} class= "nav-item nav-link">Login</a></span>
+    </li>
+    <li class="navbar-item">
+      <a href={{url_for("register")}} class= "nav-item nav-link">Register</a>
+    </li>
+  </ul>
+{% endblock %}

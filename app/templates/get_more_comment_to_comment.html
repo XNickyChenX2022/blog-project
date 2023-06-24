@@ -1,0 +1,38 @@
+<div class="row mb-1 justify-content-end" id="comment-box-{{comment_to_comment.id}}">
+  <div class="col-1 px-0 justify-content-end">
+    <div class="d-flex flex-column">
+      {% set ns2 = namespace(like_button_class="fa-regular fa-thumbs-up fa-sm", dislike_button_class="fa-regular fa-thumbs-down fa-sm") %}
+      {% if commentlikedislike.mode  == 1 %}
+        {% set ns2.like_button_class = "fa-solid fa-thumbs-up fa-sm"%}
+        {% set ns2.dislike_button_class = "fa-regular fa-thumbs-down fa-sm"%}
+      {% elif commentlikedislike.mode == 2 %}
+        {% set ns2.like_button_class = "fa-regular fa-thumbs-up fa-sm"%}
+        {% set ns2.dislike_button_class = "fa-solid fa-thumbs-down fa-sm"%}
+      {% endif %}     
+      <div class="d-flex justify-content-center">
+        <span class = "like_dislike_comment clickable" data-comment={{comment_to_comment.id}} data-mode="1" id="like_comment-{{comment_to_comment.id}}">
+          <i class="{{ns2.like_button_class}}"></i>
+        </span>
+      </div>
+      <div class="d-flex justify-content-center">
+        <span id="like_dislike_value-{{comment_to_comment.id}}">{{get_comment_likes_dislikes(comment_to_comment.id)}}</span>
+      </div>
+      <div class="d-flex justify-content-center">
+        <span class = "like_dislike_comment clickable" data-comment={{comment_to_comment.id}} data-mode="2" id="dislike_comment-{{comment_to_comment.id}}">
+          <i class="{{ns2.dislike_button_class}}"></i>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="col-8">
+    {{comment_to_comment.user.username}}<span class="small"> - {{convert_datetime(comment_to_comment.date)}} </span>  
+    <div class="text-wrap text-break" id="comment-text-{{comment_to_comment.id}}" data-text="{{comment_to_comment.text}}">{{comment_to_comment.text}}</div>   
+  </div>
+  <div class="col-2">   
+    <div class="d-flex justify-content-center justify-content-between">     
+      <a class="reply-to clickable" data-comment="{{comment_to_comment.parent.id}}" data-username="{{comment_to_comment.user.username}}"><i class="fa-solid fa-reply fa-sm"></i></a>
+      <div class="edit-to clickable" data-comment="{{comment_to_comment.id}}"><i class="fa-solid fa-pen-to-square"></i></div>
+      <div class="delete-to clickable" data-comment="{{comment_to_comment.id}}" data-current-user="{{current_user.id}}" data-owner="{{comment_to_comment.user_id}}"><i class="fa-solid fa-trash"></i></div>
+    </div>
+  </div>
+</div>  

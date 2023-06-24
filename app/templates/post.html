@@ -1,0 +1,26 @@
+{% extends "postlogin.html" %}
+
+{% block title %}
+    Post
+{% endblock %}
+
+{% block main %} 
+    <div class="beginning_position_tag" align="center">
+        <h2><div class="text-center">Post</div></h2>
+        <div class="border blog_pages">
+            <div class="row justify-content-center">
+                <form class = "form-vertical" action="/post" method="post">
+                    <div class="mb-3">
+                        <label for="title_for_post">Title</label>
+                        <input class="form-control" name="title_for_post" type="text">
+                    </div>
+                    <div class="mb-3">
+                        <label for="text_for_post">Enter Text</label>
+                        <textarea class="form-control" name="text_for_post" rows="9"></textarea>
+                    </div>
+                        <button type="submit" class="btn btn-primary">Post</button>
+                </form>
+            </div>
+        </div>
+    <div>
+{% endblock %}

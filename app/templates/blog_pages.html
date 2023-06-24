@@ -1,0 +1,193 @@
+{% extends "postlogin.html" %}
+
+{% block title %}
+View Post
+{% endblock %}
+
+{% block main %}
+  <div class="beginning_position_tag" id="blog_pages_box"> 
+    <div class="row justify-content-center">
+      <span class="border blog_pages">
+        <div class="post_positioning">
+          <div class="card border-0">
+            <div class="card-body">
+              <div class="container">
+                <div class="row d-flex flex-grow-1 justify-content-center">
+                  <div class="d-flex flex-column">
+                    <div class="row">
+                      <div class="col-1 px-0 text-center">
+                        <div class="d-flex justify-content-center">
+                          <div class="d-flex flex-column">
+                            {% set post_ns = namespace(like_button_class="fa-regular fa-thumbs-up fa-lg", dislike_button_class="fa-regular fa-thumbs-down fa-lg") %}
+                            {% if postlikeddislike.mode  == 1 %}
+                              {% set post_ns.like_button_class = "fa-solid fa-thumbs-up fa-lg"%}
+                              {% set post_ns.dislike_button_class = "fa-regular fa-thumbs-down fa-lg"%}
+                            {% elif postlikeddislike.mode == 2 %}
+                              {% set post_ns.like_button_class = "fa-regular fa-thumbs-up fa-lg"%}
+                              {% set post_ns.dislike_button_class = "fa-solid fa-thumbs-down fa-lg"%}
+                            {% endif %}     
+                            <span class="like_dislike_post clickable" data-post={{post.id}} data-mode="1" id="like_post"><i class="{{post_ns.like_button_class}}"></i></span>
+                            <span id="post_value">{{get_post_likes_dislikes(post.id)}}</span>
+                            <span class="like_dislike_post clickable" data-post={{post.id}} data-mode="2" id="dislike_post"><i class="{{post_ns.dislike_button_class}}"></i></span>
+                          </div>
+                        </div>
+                      </div>
+                      <div div class="col-11 px-0">
+                        <span class="text-wrap text-break">
+                          <h6>Posted By {{post.user.username}} {{convert_datetime(post.date)}}</h6>
+                            <b><h4 class="my-0">{{post.title}}</h3></b>
+                            {{post.text}}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="line"></div>
+          <div class="card-body text-center">
+            <form>
+                <label for="comment_text">Comment</label>
+                <textarea class="form-control resize-vertical" name="comment_text" rows="3" maxlength="10000" id="text_box"required></textarea>
+                <button class="mt-2" id="comment_box" data-postid="{{post.id}}">Comment</button>
+            </form>
+          </div>
+          <div class="line"></div>
+          <div class="card-body">
+            <div class="row d-flex flex-grow-1 justify-content-center">
+                <h4 class="text-center mb-1">Comments Section</h4>
+              <div class="container" id="comment_tree">
+                {% for comment in comments %} 
+                  <div id="comment-branch-{{comment.id}}">
+                    <div class="row mb-1" id="comment-box-{{comment.id}}">
+                      <div class="col-1 px-0 text-center">
+                        <div class="d-flex flex-column">
+                          {% set ns1 = namespace(liked_or_disliked=false, like_button_class="fa-regular fa-thumbs-up fa-sm", dislike_button_class="fa-regular fa-thumbs-down fa-sm") %}
+                          {% for check_reply in commentlikedislike %}
+                            {% if (check_reply.comment_id == comment.id) and (check_reply.mode  == 1) %}
+                              {% set ns1.liked_or_disliked = true %}
+                              {% set ns1.like_button_class = "fa-solid fa-thumbs-up fa-sm"%}
+                              {% set ns1.dislike_button_class = "fa-regular fa-thumbs-down fa-sm"%}
+                            {% elif (check_reply.comment_id == comment.id) and (check_reply.mode == 2) %}
+                              {% set ns1.liked_or_disliked = true %}
+                              {% set ns1.like_button_class = "fa-regular fa-thumbs-up fa-sm"%}
+                              {% set ns1.dislike_button_class = "fa-solid fa-thumbs-down fa-sm"%}
+                            {% endif %}     
+                            {% if ns1.liked_or_disliked == true %}
+                              {% break %}
+                            {% endif %}
+                          {% endfor%}
+                          <div class="d-flex justify-content-center">
+                            <span class = "like_dislike_comment clickable" data-comment={{comment.id}} data-mode="1" id="like_comment-{{comment.id}}">
+                              <i class="{{ns1.like_button_class}}"></i>
+                            </span>
+                          </div>
+                          <div class="d-flex justify-content-center">
+                            <span id="like_dislike_value-{{comment.id}}">{{get_comment_likes_dislikes(comment.id)}}</span>
+                          </div>
+                          <div class="d-flex justify-content-center">
+                            <span class = "like_dislike_comment clickable" data-comment={{comment.id}} data-mode="2"  id="dislike_comment-{{comment.id}}">
+                              <i class="{{ns1.dislike_button_class}}"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-9">
+                        {{comment.user.username}}<span class="small"> - {{convert_datetime(comment.date)}} </span>  
+                        <div class="text-wrap text-break" id="comment-text-{{comment.id}}" data-text="{{comment.text}}">{{comment.text}}</div>   
+                      </div>
+                      <div class="col-2">     
+                        <div class="d-flex justify-content-center justify-content-between">     
+                          <a class="reply-to clickable" data-comment="{{comment.id}}" data-username="{{comment.user.username}}"><i class="fa-solid fa-reply fa-sm"></i></a>
+                          <div class="edit-to clickable" data-comment="{{comment.id}}"><i class="fa-solid fa-pen-to-square"></i></div>
+                          <div class="delete-to clickable" data-comment="{{comment.id}}" data-current-user="{{current_user.id}}" data-owner="{{comment.user_id}}"><i class="fa-solid fa-trash"></i></div>
+                        </div>
+                      </div>
+                    </div>
+                    {% if len(comment.replies.all()) != 0 %}
+                      {% for comment_to_comment in comment.replies.all() %}
+                        <div class="row mb-1 justify-content-end" id="comment-box-{{comment_to_comment.id}}">
+                          <div class="col-1 px-0 justify-content-end">
+                            <div class="d-flex flex-column">
+                              {% set ns2 = namespace(liked_or_disliked=false, like_button_class="fa-regular fa-thumbs-up fa-sm", dislike_button_class="fa-regular fa-thumbs-down fa-sm") %}
+                              {% for check_reply in userlikedislike %}
+                                {% if (check_reply.comment_id == comment.id) and (check_reply.mode  == 1) %}
+                                  {% set ns2.liked_or_disliked = true %}
+                                  {% set ns2.like_button_class = "fa-solid fa-thumbs-up fa-sm"%}
+                                  {% set ns2.dislike_button_class = "fa-regular fa-thumbs-down fa-sm"%}
+                                {% elif (check_reply.comment_id == comment.id) and (check_reply.mode == 2) %}
+                                  {% set ns2.liked_or_disliked = true %}
+                                  {% set ns2.like_button_class = "fa-regular fa-thumbs-up fa-sm"%}
+                                  {% set ns2.dislike_button_class = "fa-solid fa-thumbs-down fa-sm"%}
+                                {% endif %}     
+                                {% if ns2.liked_or_disliked == true %}
+                                  {% break %}
+                                {% endif %}
+                              {% endfor%}
+                              <div class="d-flex justify-content-center">
+                                <span class = "like_dislike_comment clickable" data-comment={{comment_to_comment.id}} data-mode="1" id="like_comment-{{comment_to_comment.id}}">
+                                  <i class="{{ns2.like_button_class}}"></i>
+                                </span>
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                <span id="like_dislike_value-{{comment_to_comment.id}}">{{get_comment_likes_dislikes(comment_to_comment.id)}}</span>
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                <span class = "like_dislike_comment clickable" data-comment={{comment_to_comment.id}} data-mode="2" id="dislike_comment-{{comment_to_comment.id}}">
+                                  <i class="{{ns2.dislike_button_class}}"></i>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-8">
+                            {{comment_to_comment.user.username}}<span class="small"> - {{convert_datetime(comment_to_comment.date)}} </span>  
+                            <div class="text-wrap text-break" id="comment-text-{{comment_to_comment.id}}" data-text="{{comment_to_comment.text}}">{{comment_to_comment.text}}</div>   
+                          </div>
+                          <div class="col-2">   
+                            <div class="d-flex justify-content-center justify-content-between">     
+                              <a class="reply-to clickable" data-comment="{{comment_to_comment.parent.id}}" data-username="{{comment_to_comment.user.username}}"><i class="fa-solid fa-reply fa-sm"></i></a>
+                              <div class="edit-to clickable" data-comment="{{comment_to_comment.id}}"><i class="fa-solid fa-pen-to-square"></i></div>
+                              <div class="delete-to clickable" data-comment="{{comment_to_comment.id}}" data-current-user="{{current_user.id}}" data-owner="{{comment_to_comment.user_id}}"><i class="fa-solid fa-trash"></i></div>
+                            </div>
+                          </div>
+                        </div>  
+                      {% endfor %}
+                    {% endif %}
+                  </div>
+                  <div class="row justify-content-center">
+                    <div class="form-popup" id="reply-box-{{comment.id}}">
+                      <form class="form-container reply">
+                        <textarea class="comment-text-box resize-veritical justify-content-center" id="reply-textbox" maxlength="10000" name="reply_comment_text" required></textarea>
+                        <div class="text-center">
+                          <input type="hidden" name="parent_id" value={{comment.id}}>
+                          <button type="button" class="reply-to-comments btn" data-comment="{{comment.id}}">Reply</button>
+                          <button type="button" class="cancel btn " onclick="closeForm({{comment.id}})"> Close </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                {% endfor %} 
+                <div class="popup-overlay" id="edit-box">
+                  <div class="popup-content">
+                      <form class="form-container reply">
+                        <div class="text-center">
+                          <label id="comment-info-table"> Editing Comment </label>
+                        </div>
+                        <textarea class="form-control noresize large-box" id="submit-box"></textarea>
+                        <div class="text-center pt-2">
+                          <button type="button" class="submit-edit btn">Submit</button>
+                          <button type="button" class="cancel btn" onclick="closeEdit()"> Close </button>
+                        </div>
+                      </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> 
+      </span>
+    </div>
+  </div>
+  <script></script>
+{% endblock %}

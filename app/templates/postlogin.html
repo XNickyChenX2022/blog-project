@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <ul class="navbar-nav ms-auto">
+        <form action="{{url_for('search')}}" method="post" class="d-flex">
+            <input class="form-control me-2" name = "search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </ul>
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+            <div class="btn-group">
+                <div class="btn-group dropstart" role="group">
+                    <button class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropstart</span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{url_for('myposts')}}">My Posts</a></li>
+                    </ul>
+                </div>
+                <button type="button" class="btn btn-secondary">
+                    {{current_user.username}}
+                </button>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a href="/logout" class="nav-item nav-link">Logout</a>
+        </li>
+    </ul>
+{% endblock %}

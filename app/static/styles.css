@@ -1,0 +1,164 @@
+/* Hide horizontal scrollbar */
+body {
+  overflow-x: hidden; 
+}
+
+/* Defines posts on Homepage*/
+#homepage_post{
+  border-color:lightgray;
+  border-radius: 10px 10px 10px 10px;
+  padding: 10px;
+  height: 110px;
+}
+
+.card-info{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding:10px;
+}
+
+.card-width{
+  width: 1000px;
+}
+/* establishes the length of the button link on homepage*/
+.link-button-width{
+  width: 978.4px;
+  height: 27.2px;
+  text-align: left;  
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+/* Stops overflow of cards on homepage*/
+.sections{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.beginning_position_tag{
+  position: relative;
+  top:50px;
+}
+.page_beginning{
+  position:relative;
+  top: 15px;
+  padding: 20px;
+}
+.post_positioning{
+  clear:both;
+  margin: 10px;
+}
+/* allows resizing for textarea */
+.resize-vertical{
+  resize:vertical;
+}
+/* prevents textarea from resizing */
+.noresize {
+  resize: none;
+}
+
+.large-box{
+  height: 400px;
+}
+.blog_pages{
+  border-radius: 10px 10px 10px 10px;          
+  border-width: thin;
+  border-color: solid black;
+  padding: 10px; 
+  width: 800px;
+}
+
+/*Creates lines*/
+.line{
+  width:95%;
+  height: 2px;
+  border-bottom: 1px solid lightgray;
+  position: relative;
+  margin: auto
+}
+
+.form-popup {
+  display: none;
+  position: relative;
+  bottom: 0;
+  width: 650px;
+  padding: 0px;
+  border: 1px solid #ffffff;
+  z-index: 9;
+}
+
+.form-container .reply{
+  height: 200px;
+  max-width: 750px;
+  padding: 10px;
+  background-color: white;
+  text-align: center;
+}
+.form-container .button-group{
+  width:100%;
+  text-align: center;
+}
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.comment-text-box{
+  width:100%;
+  border-width: 1px;
+  padding: 4px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.btn .btn-link.open-button{
+  text-align: right;
+  padding: 0px;
+}
+
+.ten-px-box{
+  height: 10px;
+  width: 10px;
+}
+
+h6{
+  padding: 1px;
+  margin: 0px;
+}
+h4{
+  padding: 0px;
+  margin: 0px;
+}
+
+.clickable{
+  cursor: pointer;
+}
+
+/* displaying the edit comment popup*/
+.popup-overlay {
+  display: none;
+  position: fixed;
+  width: 900px;
+  height: 500px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  background-color: #fff;
+  border-radius: 10px;
+}  
+.popup-content {
+  background-color: #fff;
+  width: 850px;
+  height: 450px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 20px;
+} 

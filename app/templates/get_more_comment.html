@@ -1,0 +1,53 @@
+<div id="comment-branch-{{comment.id}}">
+  <div class="row mb-1" id="comment-box-{{comment.id}}">
+    <div class="col-1 px-0 text-center">
+      <div class="d-flex flex-column">
+        {% set ns1 = namespace(like_button_class="fa-regular fa-thumbs-up fa-sm", dislike_button_class="fa-regular fa-thumbs-down fa-sm") %}
+          {% if commentlikedislike.mode  == 1 %}
+            {% set ns1.like_button_class = "fa-solid fa-thumbs-up fa-sm"%}
+            {% set ns1.dislike_button_class = "fa-regular fa-thumbs-down fa-sm"%}
+          {% elif commentlikedislike.mode == 2 %}
+            {% set ns1.liked_or_disliked = true %}
+            {% set ns1.like_button_class = "fa-regular fa-thumbs-up fa-sm"%}
+            {% set ns1.dislike_button_class = "fa-solid fa-thumbs-down fa-sm"%}
+          {% endif %}     
+        <div class="d-flex justify-content-center">
+          <span class = "like_dislike_comment clickable" data-comment={{comment.id}} data-mode="1" id="like_comment-{{comment.id}}">
+            <i class="{{ns1.like_button_class}}"></i>
+          </span>
+        </div>
+        <div class="d-flex justify-content-center">
+          <span id="like_dislike_value-{{comment.id}}">{{get_comment_likes_dislikes(comment.id)}}</span>
+        </div>
+        <div class="d-flex justify-content-center">
+          <span class = "like_dislike_comment clickable" data-comment={{comment.id}} data-mode="2"  id="dislike_comment-{{comment.id}}">
+            <i class="{{ns1.dislike_button_class}}"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="col-9">
+      {{comment.user.username}}<span class="small"> - {{convert_datetime(comment.date)}} </span>  
+      <div class="text-wrap text-break" id="comment-text-{{comment.id}}" data-text="{{comment.text}}">{{comment.text}}</div>   
+    </div>
+    <div class="col-2">     
+      <div class="d-flex justify-content-center justify-content-between">     
+        <a class="reply-to clickable" data-comment="{{comment.id}}" data-username="{{comment.user.username}}"><i class="fa-solid fa-reply fa-sm"></i></a>
+        <div class="edit-to clickable" data-comment="{{comment.id}}"><i class="fa-solid fa-pen-to-square"></i></div>
+        <div class="delete-to clickable" data-comment="{{comment.id}}" data-current-user="{{current_user.id}}" data-owner="{{comment.user_id}}"><i class="fa-solid fa-trash"></i></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div class="form-popup" id="reply-box-{{comment.id}}">
+    <form class="form-container reply">
+      <textarea class="comment-text-box resize-veritical justify-content-center" id="reply-textbox" maxlength="10000" name="reply_comment_text" required></textarea>
+      <div class="button-group">
+        <input type="hidden" name="parent_id" value={{comment.id}}>
+        <button type="button" class="reply-to-comments btn" data-comment="{{comment.id}}">Reply</button>
+        <button type="button" class="btn" onclick="closeForm({{comment.id}})"> Close </button>
+      </div>
+    </form>
+  </div>
+</div>

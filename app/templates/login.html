@@ -1,0 +1,20 @@
+{% extends "prelogin.html" %}
+
+{% block title%}
+    Login
+{% endblock %}
+{% block main %}
+        <form action="/login" method="post" id="table">
+            <h3 align="center" class="py-3 mt-3">Login</h3>
+            <div class="mb-3">
+                <input autofocus autocomplete="off" type="Text" name="username" placeholder="Username" autofocus class="form-control mx-auto w-auto">
+            </div>
+            <div class="mb-3">
+                <input autofocus autocomplete="off" type="password" placeholder="Password" name="password" autofocus class="form-control mx-auto w-auto">
+            </div>
+            <div align="center">
+                    <button type="submit" class="btn btn-primary"> submit </button>
+            </div>  
+        </form>
+    </div>
+{% endblock%}
