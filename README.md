@@ -9,33 +9,32 @@ This project includes the following features:
   * Enables users the ability to make posts, search for posts, look for posts they have made, like and dislike posts/comments, edit/delete/make/reply to comments
   * Uses Fetch-API to dynamically insert/update/ delete comments, likes, dislikes, and posts
 # II. Using the Application
-1.clone the repo (open in vscode)
+1. clone the repo (open in vscode)
 ```
 https://github.com/XNickyChenX2022/blog-project.git
 ```
-2.Install Libraries
+2. Install Libraries
 ```
 $ pip install -r requirements.txt
 ```
-3.Setup and Activate virual environment. In the terminal, type the following commands for pc (see https://flask.palletsprojects.com/en/2.3.x/installation/ for mac instructions)
+3. Setup and Activate virual environment. In the terminal, type the following commands for pc (see https://flask.palletsprojects.com/en/2.3.x/installation/ for mac instructions)
 ```
 py -3 -m venv .venv
 .venv\Scripts\activate
 ```
-4.Create Postgresql database (install postgresql and use pgAdmin4)
-	create a server in pgadmin. Then in pgadmin create database (mine was called blog_database, remember this for later). Use the following below for initializing the server.
-   * Hostname/address: localhost
-   * Port:5432
-   * Username:Postgres
-   * Password:Your Password
-5. In Configuration.py (in the app folder, under templates folder) change the SQLALCHEMY_DATABASE_URI to connect to your database locally.
-   See Example Below
-   ```
-   class Config:
-    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:password@localhost/blog_database'
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-   ```
-   Fill in the placeholders shown in Config.py
+4. Create Postgresql database (install postgresql and use pgAdmin4) 
+create a server in pgadmin. Then in pgadmin create database (mine was called blog_database, remember this for later). Use the following below for initializing the server.
+* Hostname/address: localhost
+* Port:5432
+* Username:Postgres
+* Password:Your Password
+5. In Configuration.py (in the app folder, under templates folder) change the SQLALCHEMY_DATABASE_URI to connect to your database locally.Fill in the placeholders shown in Config.py. See Example Below
+```
+class Config:
+SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:password@localhost/blog_database'
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+```
+
 6. go to the terminal and type the following commands to install the database.
 ```
 python
@@ -52,3 +51,4 @@ python ./run.py
 ```
 http://127.0.0.1:5000
 ```
+For any issues, email me at nickychen2022@gmail.com
