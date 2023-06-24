@@ -16,13 +16,18 @@ https://github.com/XNickyChenX2022/blog-project.git
 ```
 $ pip install -r requirements.txt
 ```
-3.Create Postgresql database (install postgresql and use pgAdmin4)
+3.Setup and Activate virual environment. In the terminal, type the following commands for pc (see https://flask.palletsprojects.com/en/2.3.x/installation/ for mac instructions)
+```
+py -3 -m venv .venv
+.venv\Scripts\activate
+```
+4.Create Postgresql database (install postgresql and use pgAdmin4)
 	create a server in pgadmin. Then in pgadmin create database (mine was called blog_database, remember this for later). Use the following below for initializing the server.
    * Hostname/address: localhost
    * Port:5432
    * Username:Postgres
    * Password:Your Password
-4. In Configuration.py (in the app folder, under templates folder) change the SQLALCHEMY_DATABASE_URI to connect to your database locally.
+5. In Configuration.py (in the app folder, under templates folder) change the SQLALCHEMY_DATABASE_URI to connect to your database locally.
    See Example Below
    ```
    class Config:
@@ -30,7 +35,7 @@ $ pip install -r requirements.txt
     SQLALCHEMY_TRACK_MODIFICATIONS = False
    ```
    Fill in the placeholders shown in Config.py
-5. go to the terminal and type the following commands to install the database.
+6. go to the terminal and type the following commands to install the database.
 ```
 python
 from app import db, app
@@ -38,11 +43,11 @@ app.app_context().push()
 db.create_all()
 exit()
 ```
-6. Now in the terminal type:
+7. Now in the terminal type:
 ```
 python ./run.py
 ```
-7. Run the application on
+8. Run the application on
 ```
 http://127.0.0.1:5000
 ```
