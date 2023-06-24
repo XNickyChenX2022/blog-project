@@ -1,6 +1,7 @@
 # blog-project
 # I. Introduction
 Welcome to my Blog Web Application.
+To see a demo, watch this youtube video displaying the project(https://youtu.be/Zb_7Ufm5yqs)
 This project uses Flask, Javascript(jQuery, Fetch API), PostgreSQL.
 This project includes the following features:
   * Uses Flask-Login for login and registration purposes
