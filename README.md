@@ -17,12 +17,11 @@ https://github.com/XNickyChenX2022/blog-project.git
 $ pip install -r requirements.txt
 ```
 3.Create Postgresql database (install postgresql and use pgAdmin4)
-	create a server in pgadmin using:
- * Hostname/address: localhost
- * Port:5432
- * Username:Postgres
- * Password:Your Password
-Then in pgadmin create database (mine was called blog_database, remember this for later)
+	create a server in pgadmin. Then in pgadmin create database (mine was called blog_database, remember this for later). Use the following below for initializing the server.
+   * Hostname/address: localhost
+   * Port:5432
+   * Username:Postgres
+   * Password:Your Password
 4. In Configuration.py (in the app folder, under templates folder) change the SQLALCHEMY_DATABASE_URI to connect to your database locally.
    See Example Below
    ```
@@ -31,3 +30,19 @@ Then in pgadmin create database (mine was called blog_database, remember this fo
     SQLALCHEMY_TRACK_MODIFICATIONS = False
    ```
    Fill in the placeholders shown in Config.py
+5. go to the terminal and type the following commands to install the database.
+```
+python
+from app import db, app
+app.app_context().push()
+db.create_all()
+exit()
+```
+6. Now in the terminal type:
+```
+python ./run.py
+```
+7. Run the application on
+```
+http://127.0.0.1:5000
+```
