@@ -44,7 +44,7 @@ def register():
                 return render_template('register.html', msg = 'Username Already Taken')
             else:
                 if check_valid_password(password) == False:
-                    flash('Invalid Password', category='error')
+                    flash('Invalid Password:  Passwords must include a special character, an uppercase letter, a lowercase letter, and should be at least 12 letters', category='error')
                 elif conformation != password:
                     flash('Passwords Do not Match', category='error')
                 elif len(username) > 18:
