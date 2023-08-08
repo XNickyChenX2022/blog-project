@@ -33,7 +33,7 @@
     <div class="col-2">     
       <div class="d-flex justify-content-center justify-content-between">     
         <a class="reply-to clickable" data-comment="{{comment.id}}" data-username="{{comment.user.username}}"><i class="fa-solid fa-reply fa-sm"></i></a>
-        <div class="edit-to clickable" data-comment="{{comment.id}}"><i class="fa-solid fa-pen-to-square"></i></div>
+        <div class="edit-to clickable" data-comment="{{comment.id}}" data-current-user="{{current_user.id}}" data-owner="{{comment.user_id}}"><i class="fa-solid fa-pen-to-square"></i></div>
         <div class="delete-to clickable" data-comment="{{comment.id}}" data-current-user="{{current_user.id}}" data-owner="{{comment.user_id}}"><i class="fa-solid fa-trash"></i></div>
       </div>
     </div>
