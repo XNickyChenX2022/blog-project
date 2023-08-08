@@ -17,7 +17,7 @@ https://github.com/XNickyChenX2022/blog-project.git
 ```
 $ pip install -r requirements.txt
 ```
-3. Setup and Activate virual environment. In the terminal, type the following commands for pc (see https://flask.palletsprojects.com/en/2.3.x/installation/ for mac instructions)
+3. Setup and activate virual environment. In the terminal, type the following commands for pc (see https://flask.palletsprojects.com/en/2.3.x/installation/ for mac instructions)
 ```
 py -3 -m venv .venv
 .venv\Scripts\activate
