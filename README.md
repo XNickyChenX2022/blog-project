@@ -28,7 +28,7 @@ create a server in pgadmin. Then in pgadmin create database (mine was called blo
 * Port:5432
 * Username:Postgres
 * Password:Your Password
-5. In Configuration.py (in the app folder, under templates folder) change the SQLALCHEMY_DATABASE_URI to connect to your database locally.Fill in the placeholders shown in Config.py. See Example Below
+5. In Configuration.py (in the app folder) change the SQLALCHEMY_DATABASE_URI to connect to your database locally.Fill in the placeholders shown in Config.py. See Example Below
 ```
 class Config:
 SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:password@localhost/blog_database'
