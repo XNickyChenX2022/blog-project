@@ -5,7 +5,7 @@ To see a demo, watch this youtube video displaying the project(https://www.youtu
 This project uses Flask, Javascript(jQuery, Fetch API), PostgreSQL.
 This project includes the following features:
   * Uses Flask-Login for login and registration purposes
-  * Uses Flask-SQLAlchemy to create models for PostgreSQL database.
+  * Uses Flask-SQLAlchemy to create models for PostgreSQL database
   * Enables users the ability to make posts, search for posts, look for posts they have made, like and dislike posts/comments, edit/delete/make/reply to comments
   * Uses Fetch-API to dynamically insert/update/delete comments, likes, dislikes, and posts
 # II. Using the Application
